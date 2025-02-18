@@ -15,6 +15,20 @@ namespace U4_S2_D1
             double conto = 0;
             string input;
 
+            var menuItems = new Dictionary<string, double>
+                {
+                    { "1", 2.50 },
+                    { "2", 5.20 },
+                    { "3", 10.00 },
+                    { "4", 12.50 },
+                    { "5", 3.50 },
+                    { "6", 8.00 },
+                    { "7", 5.00 },
+                    { "8", 5.00 },
+                    { "9", 6.00 },
+                    { "10", 7.90 }
+                };
+
         Start:
             Console.WriteLine("==============MENU==============" +
             "\r\n\r\n1:  Coca Cola 150 ml (€ 2.50)" +
@@ -33,44 +47,19 @@ namespace U4_S2_D1
             Console.WriteLine("\r\nSelezionare il prodotto dal menù o digitare 11 per la stampa del conto:\r\n");
             input = Console.ReadLine();
 
-            switch (input)
+            if (menuItems.ContainsKey(input))
             {
-                case "1":
-                    conto += 2.50;
-                    goto Start;
-                case "2":
-                    conto += 5.20;
-                    goto Start;
-                case "3":
-                    conto += 10.00;
-                    goto Start;
-                case "4":
-                    conto += 12.50;
-                    goto Start;
-                case "5":
-                    conto += 3.50;
-                    goto Start;
-                case "6":
-                    conto += 8.00;
-                    goto Start;
-                case "7":
-                    conto += 5.00;
-                    goto Start;
-                case "8":
-                    conto += 5.00;
-                    goto Start;
-                case "9":
-                    conto += 6.00;
-                    goto Start;
-                case "10":
-                    conto += 7.90;
-                    goto Start;
-                case "11":
-                    Console.WriteLine($"\r\nIl conto totale (più servizio al tavolo di €3.00) è di €{(conto + 3):F2}");
-                    break;
-                default:
-                    Console.WriteLine("\r\nScelta non valida! Riprova.\r\n");
-                    goto Start;
+                conto += menuItems[input];
+                goto Start;
+            }
+            else if (input == "11")
+            {
+                Console.WriteLine($"\r\nIl conto totale (più servizio al tavolo di €3.00) è di €{(conto + 3):F2}");
+            }
+            else
+            {
+                Console.WriteLine("\r\nScelta non valida! Riprova.\r\n");
+                goto Start;
             }
         }
     }
